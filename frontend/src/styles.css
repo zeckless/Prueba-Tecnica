@@ -370,6 +370,31 @@ meter {
   padding: 6px 10px;
 }
 
+.resource-type-course {
+  background: #dbeafe;
+  color: #1e4f91;
+}
+
+.resource-type-program {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.resource-type-site {
+  background: #efe7ff;
+  color: #5b3b91;
+}
+
+.resource-type-guide {
+  background: #fff1cf;
+  color: #80570f;
+}
+
+.resource-type-webinar {
+  background: #ffe2dc;
+  color: #9a3412;
+}
+
 .prompt-layout {
   align-items: start;
   display: grid;

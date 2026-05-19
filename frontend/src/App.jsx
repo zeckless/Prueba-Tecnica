@@ -313,6 +313,9 @@ function Resources({ resources }) {
       : resources.filter((resource) =>
           activeType === "webinar"
             ? resource.label?.toLowerCase() === "webinar"
+            : activeType === "program"
+              ? resource.type === "program" &&
+                resource.label?.toLowerCase() !== "webinar"
             : resource.type === activeType,
         );
 
@@ -343,7 +346,9 @@ function Resources({ resources }) {
           <article className="resource-card" key={resource.id}>
             <div className="poster-image">
               <img alt="" src={resource.imageUrl} />
-              <span className="resource-type">
+              <span
+                className={`resource-type resource-type-${resource.label?.toLowerCase() || resource.type}`}
+              >
                 {resource.label || resourceTypeLabels[resource.type]}
               </span>
             </div>
