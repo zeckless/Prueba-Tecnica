@@ -39,12 +39,15 @@ class Resource(models.Model):
     resource_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     url = models.URLField(blank=True)
     image_url = models.URLField(blank=True)
+    label = models.CharField(max_length=80, blank=True)
+    event_date = models.CharField(max_length=80, blank=True)
     source = models.CharField(max_length=120)
     featured = models.BooleanField(default=False)
+    sort_order = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-featured", "title"]
+        ordering = ["-sort_order", "-featured", "title"]
 
     def __str__(self):
         return self.title
