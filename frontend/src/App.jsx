@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import Biblioteca from "./Biblioteca";
 import {
   BookOpenCheck,
   CalendarDays,
@@ -153,16 +154,7 @@ function App() {
         {!loading && activeTab === "dashboard" && (
           <Dashboard setActiveTab={setActiveTab} />
         )}
-        {!loading && activeTab === "prompts" && (
-          <Prompts
-            prompts={filteredPrompts}
-            query={query}
-            setQuery={setQuery}
-            status={status}
-            setStatus={setStatus}
-            submitPrompt={submitPrompt}
-          />
-        )}
+        {!loading && activeTab === "prompts" && <Biblioteca />}
         {!loading && activeTab === "resources" && <Resources resources={resources} />}
         {!loading && activeTab === "community" && <Community discussions={discussions} />}
       </section>
