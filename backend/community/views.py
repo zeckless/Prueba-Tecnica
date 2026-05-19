@@ -36,6 +36,8 @@ def _resource_payload(resource):
         "type": resource.resource_type,
         "url": resource.url,
         "imageUrl": resource.image_url,
+        "label": resource.label,
+        "eventDate": resource.event_date,
         "source": resource.source,
         "featured": resource.featured,
     }
