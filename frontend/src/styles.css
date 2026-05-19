@@ -553,6 +553,29 @@ form button {
   margin: 0;
 }
 
+.resource-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resource-filter button {
+  background: #ffffff;
+  border: 1px solid #cbd7e2;
+  border-radius: 999px;
+  color: #405164;
+  font-weight: 700;
+  min-height: 38px;
+  padding: 0 14px;
+}
+
+.resource-filter button.active,
+.resource-filter button:hover {
+  background: #17212b;
+  border-color: #17212b;
+  color: #ffffff;
+}
+
 .resource-card {
   box-shadow: 0 18px 34px rgb(25 36 48 / 8%);
   display: flex;
@@ -601,6 +624,15 @@ form button {
   font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+.event-date {
+  align-items: center;
+  color: #255f73;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 800;
+  gap: 7px;
 }
 
 .resource-card footer {

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   BookOpenCheck,
+  CalendarDays,
   ClipboardList,
   ExternalLink,
   Filter,
@@ -25,6 +26,13 @@ const statusLabels = {
   curated: "Curado",
   review: "En revisión",
   draft: "Borrador",
+};
+
+const resourceTypeLabels = {
+  course: "Cursos",
+  program: "Programas",
+  site: "Sitios oficiales",
+  guide: "Guías",
 };
 
 function App() {
@@ -290,25 +298,64 @@ function Prompts({ prompts, query, setQuery, status, setStatus, submitPrompt }) 
 }
 
 function Resources({ resources }) {
+  const [activeType, setActiveType] = useState("all");
+  const filters = [
+    { id: "all", label: "Todos" },
+    { id: "webinar", label: "Webinar" },
+    { id: "program", label: "Programas" },
+    { id: "course", label: "Cursos" },
+    { id: "site", label: "Sitios oficiales" },
+    { id: "guide", label: "Guías" },
+  ];
+  const filteredResources =
+    activeType === "all"
+      ? resources
+      : resources.filter((resource) =>
+          activeType === "webinar"
+            ? resource.label?.toLowerCase() === "webinar"
+            : resource.type === activeType,
+        );
+
   return (
     <div className="resource-section">
       <div className="resource-section-header">
         <div>
-          <p className="eyebrow">Repositorio curado</p>
-          <h2>Materiales para llevar IA al aula</h2>
+          <p className="eyebrow">Repositorio</p>
+          <h2>Material relevante para la comunidad docente</h2>
         </div>
       </div>
 
+      <div className="resource-filter" aria-label="Filtrar recursos">
+        {filters.map((filter) => (
+          <button
+            className={activeType === filter.id ? "active" : ""}
+            key={filter.id}
+            onClick={() => setActiveType(filter.id)}
+            type="button"
+          >
+            {filter.label}
+          </button>
+        ))}
+      </div>
+
       <section className="resource-grid">
-        {resources.map((resource) => (
+        {filteredResources.map((resource) => (
           <article className="resource-card" key={resource.id}>
             <div className="poster-image">
               <img alt="" src={resource.imageUrl} />
-              <span className="resource-type">{resource.type}</span>
+              <span className="resource-type">
+                {resource.label || resourceTypeLabels[resource.type]}
+              </span>
             </div>
             <div className="poster-body">
               <span className="poster-source">{resource.source}</span>
               <h2>{resource.title}</h2>
+              {resource.eventDate ? (
+                <span className="event-date">
+                  <CalendarDays size={16} />
+                  {resource.eventDate}
+                </span>
+              ) : null}
               <p>{resource.description}</p>
             </div>
             <footer>
